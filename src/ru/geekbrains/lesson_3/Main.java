@@ -22,7 +22,7 @@ public class Main {
     initMap();
     printMap();
 
-/*    while (true){
+   while (true){
 
         humanTurn();
         if (isEndGame(DotX)) {
@@ -39,7 +39,7 @@ public class Main {
     }
 
         System.out.println("Игра окончена!");
-*/
+
     }
 
     //Метод подготовки поля
@@ -69,4 +69,30 @@ public class Main {
         System.out.println();
     }
 
+    //Ход человека
+    private static void humanTurn(){
+        int x, y; //строка и столбец
+        do {
+            System.out.println("Введите координаты через пробел");
+            y = scaner.nextInt() - 1;
+            x = scaner.nextInt() - 1;
+        }while (!isCellValid(x, y));
+
+        map[y][x] = DotX;
+    }
+
+    //валидность введенных координат
+    private static boolean isCellValid(int x, int y){
+        boolean result = true;
+
+        if (x < 0 || x >= Size || y < 0 || y >= Size){
+            result = false;
+        }
+
+        if (map[y][x] != DotEmpty){
+            result = false;
+        }
+
+        return result;
+    }
 }
