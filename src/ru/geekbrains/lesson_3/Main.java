@@ -29,12 +29,12 @@ public class Main {
             break;
         }
 
-
+/*
         computerTurn();
         if (isEndGame(DotO)) {
             break;
         }
-
+*/
 
     }
 
@@ -73,7 +73,8 @@ public class Main {
     private static void humanTurn(){
         int x, y; //строка и столбец
         do {
-            System.out.println("Введите координаты через пробел");
+            System.out.println("Введите координаты через пробел ");
+            System.out.println();
             y = scaner.nextInt() - 1;
             x = scaner.nextInt() - 1;
         }while (!isCellValid(x, y));
