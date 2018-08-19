@@ -95,4 +95,52 @@ public class Main {
 
         return result;
     }
+
+    //окончание игры
+    private static boolean isEndGame(char winSumbol){
+        boolean result = false;
+
+        printMap();
+
+        //игра продоожится?
+        if (checkWin(winSumbol)){
+            System.out.println("Победа за " + winSumbol);
+            result = true;
+        }
+        if (isMapFull()){
+            System.out.println("Ничья!");
+            result = true;
+        }
+
+        return result;
+    }
+
+    private static boolean isMapFull(){
+        boolean result = true;
+
+        for (int i = 0; i < Size; i++){
+            for (int j = 0; j < Size; j++){
+                if (map[i][j] == DotEmpty)
+                    result = false;
+            }
+        }
+        return result;
+    }
+
+    private static boolean checkWin(char winSumbol){
+        boolean result = false;
+
+        if (
+                (map[0][0] == winSumbol && map[0][1] == winSumbol && map [0][2] == winSumbol) ||
+                (map[1][0] == winSumbol && map[1][1] == winSumbol && map [1][2] == winSumbol) ||
+                (map[2][0] == winSumbol && map[2][1] == winSumbol && map [2][2] == winSumbol) ||
+                (map[0][0] == winSumbol && map[1][0] == winSumbol && map [2][0] == winSumbol) ||
+                (map[0][1] == winSumbol && map[1][1] == winSumbol && map [2][1] == winSumbol) ||
+                (map[0][2] == winSumbol && map[1][2] == winSumbol && map [2][2] == winSumbol) ||
+                (map[0][0] == winSumbol && map[1][1] == winSumbol && map [2][2] == winSumbol) ||
+                (map[2][0] == winSumbol && map[1][1] == winSumbol && map [0][2] == winSumbol)){
+            result = true;
+        }
+        return result;
+    }
 }
