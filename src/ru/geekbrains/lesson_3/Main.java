@@ -16,6 +16,8 @@ public class Main {
     public static final char DotX = 'X'; //крестики
     public static final char DotO = 'O'; //нолики
 
+    private static boolean Stuped = false;
+
     public static Scanner scaner = new Scanner(System.in);
     private static Random ramdom = new Random();
 
@@ -89,10 +91,111 @@ public class Main {
         int x = -1;
         int y = -1;
 
-        do {
-            x = ramdom.nextInt(Size);
-            y = ramdom.nextInt(Size);
-        } while (!isCellValid(x, y));
+        if (Stuped) {
+            do {
+                x = ramdom.nextInt(Size);
+                y = ramdom.nextInt(Size);
+            } while (!isCellValid(x, y));
+        }
+        else {
+            boolean oneTurn = true;
+            boolean result = false;
+        for (int i = 0; i < Size; i++){
+            for (int j = 0; j < Size; j++){
+                if (map[i][j] == DotEmpty){
+
+                    if (i == 1 & j == 1){
+                        if (map[0][0] == DotO || map[0][1] == DotO || map[0][2] == DotO ||
+                            map[0][0] == DotO || map[0][1] == DotO || map[0][2] == DotO ||
+                            map[0][0] == DotO || map[0][1] == DotO || map[0][2] == DotO){
+                            y = i;
+                            x = j;
+                            result = true;
+                        }
+                    }
+
+                    if (i == 0 & j == 0){
+                        if (map[0][1] == DotO || map[1][1] == DotO || map[1][0] == DotO){
+                            y = i;
+                            x = j;
+                            result = true;
+                        }
+                    }
+
+                    if (i == 0 & j == 1){
+                        if (map[0][0] == DotO || map[1][1] == DotO || map[0][2] == DotO){
+                            y = i;
+                            x = j;
+                            result = true;
+                        }
+                    }
+
+                    if (i == 0 & j == 2){
+                        if (map[0][1] == DotO || map[1][1] == DotO || map[1][2] == DotO){
+                            y = i;
+                            x = j;
+                            result = true;
+                        }
+                    }
+
+                    if (i == 1 & j == 0){
+                        if (map[0][0] == DotO || map[1][1] == DotO || map[2][0] == DotO){
+                            y = i;
+                            x = j;
+                            result = true;
+                        }
+                    }
+
+                    if (i == 1 & j == 2){
+                        if (map[0][2] == DotO || map[1][1] == DotO || map[2][2] == DotO){
+                            y = i;
+                            x = j;
+                            result = true;
+                        }
+                    }
+
+                    if (i == 2 & j == 0){
+                        if (map[1][0] == DotO || map[1][1] == DotO || map[2][1] == DotO){
+                            y = i;
+                            x = j;
+                            result = true;
+                        }
+                    }
+
+                    if (i == 2 & j == 1){
+                        if (map[2][0] == DotO || map[1][1] == DotO || map[2][2] == DotO){
+                            y = i;
+                            x = j;
+                            result = true;
+                        }
+                    }
+
+                    if (i == 2 & j == 2){
+                        if (map[1][2] == DotO || map[1][1] == DotO || map[2][1] == DotO){
+                            y = i;
+                            x = j;
+                            result = true;
+                        }
+                    }
+
+                    if (result) {
+                        oneTurn = false;
+                        break;
+                    }
+                }
+            }
+            if (oneTurn = false){
+                break;
+            }
+            else oneTurn = true;
+        }
+        if (oneTurn) {
+            do {
+                x = ramdom.nextInt(Size);
+                y = ramdom.nextInt(Size);
+            } while (!isCellValid(x, y));
+        }
+        }
 
         System.out.println("Компьютер выбрал ячейку " + (y + 1) + " " + (x +1));
         map[y][x] = DotO;
