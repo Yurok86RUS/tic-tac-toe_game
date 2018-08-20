@@ -1,5 +1,6 @@
 package ru.geekbrains.lesson_3;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -16,6 +17,7 @@ public class Main {
     public static final char DotO = 'O'; //нолики
 
     public static Scanner scaner = new Scanner(System.in);
+    private static Random ramdom = new Random();
 
     public static void main(String[] args) {
 
@@ -29,12 +31,12 @@ public class Main {
             break;
         }
 
-/*
+
         computerTurn();
         if (isEndGame(DotO)) {
             break;
         }
-*/
+
 
     }
 
@@ -80,6 +82,21 @@ public class Main {
         }while (!isCellValid(x, y));
 
         map[y][x] = DotX;
+    }
+
+    //Ход компьютера
+    private static void computerTurn(){
+        int x = -1;
+        int y = -1;
+
+        do {
+            x = ramdom.nextInt(Size);
+            y = ramdom.nextInt(Size);
+        } while (!isCellValid(x, y));
+
+        System.out.println("Компьютер выбрал ячейку " + (y + 1) + " " + (x +1));
+        map[y][x] = DotO;
+
     }
 
     //валидность введенных координат
