@@ -27,23 +27,16 @@ public class Main {
     printMap();
 
    while (true){
-
         humanTurn();
         if (isEndGame(DotX)) {
             break;
         }
-
-
         computerTurn();
         if (isEndGame(DotO)) {
             break;
         }
-
-
     }
-
         System.out.println("Игра окончена!");
-
     }
 
     //Метод подготовки поля
@@ -206,8 +199,13 @@ public class Main {
 
         for (int i = 0; i < Size; i++){
             for (int j = 0; j < Size; j++){
-                if (map[i][j] == DotEmpty)
+                if (map[i][j] == DotEmpty) {
                     result = false;
+                    break;
+                }
+            }
+            if (!result){
+                break;
             }
         }
         return result;
@@ -216,7 +214,7 @@ public class Main {
     private static boolean checkWin(char winSumbol){
         boolean result = false;
 
-        if (
+ /*       if (
                 (map[0][0] == winSumbol && map[0][1] == winSumbol && map [0][2] == winSumbol) ||
                 (map[1][0] == winSumbol && map[1][1] == winSumbol && map [1][2] == winSumbol) ||
                 (map[2][0] == winSumbol && map[2][1] == winSumbol && map [2][2] == winSumbol) ||
@@ -226,6 +224,51 @@ public class Main {
                 (map[0][0] == winSumbol && map[1][1] == winSumbol && map [2][2] == winSumbol) ||
                 (map[2][0] == winSumbol && map[1][1] == winSumbol && map [0][2] == winSumbol)){
             result = true;
+        }
+        */
+
+        if (linesWin(winSumbol) || diagonalsWin(winSumbol)){
+            result = true;
+        }
+        return result;
+    }
+
+    private static boolean diagonalsWin(char winSumbol){
+        boolean osnovDiag = true;
+        boolean pobochDiag = true;
+        boolean result = false;
+
+        for (int i = 0; i < Size; i++){
+            osnovDiag &= (map[i][i] == winSumbol);
+            pobochDiag &= (map[Size-i-1][i] == winSumbol);
+        }
+
+        if (osnovDiag || pobochDiag){
+            result = true;
+        }
+        return result;
+    }
+
+    private static boolean linesWin(char winSumbol){
+        boolean result = false;
+
+        for (int i = 0; i < Size; i++){
+            boolean stroka = true;
+            boolean stolb = true;
+
+            for (int j = 0; j < Size; j++){
+
+                stroka &= (map[j][i] == winSumbol);
+                stolb &= (map[i][j] == winSumbol);
+
+            }
+            if (stroka || stolb){
+                result = true;
+                break;
+            }
+            if (result){
+                break;
+            }
         }
         return result;
     }
